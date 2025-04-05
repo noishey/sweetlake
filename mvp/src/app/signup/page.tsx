@@ -76,7 +76,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <GradientBackground className="opacity-95" />
+      {/* <GradientBackground className="opacity-95" />
       <div className="max-w-md w-full mx-auto p-8 bg-[#0f2027]/80 backdrop-blur-lg rounded-xl shadow-2xl border border-[#2c5364]/30">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#2c5364]">
           {type === 'signup' ? 'Create Account' : <MultilingualGreeting />}
@@ -115,7 +115,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             {type === 'signup' ? 'Login' : 'Sign Up'}
           </a>
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

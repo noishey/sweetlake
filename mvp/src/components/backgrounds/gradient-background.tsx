@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -9,19 +10,18 @@ interface GradientBackgroundProps {
 
 export function GradientBackground({
   className,
-  speed = 0.0015, // Slow, smooth movement
+  speed = 0.0015,
   colors = [
-    '#0b2e1d', // Deep forest green
-    '#0f3d2e', // Dark jade
-    '#14532d', // Dense moss green
-    '#166534', // Classic dark green
-    '#1e4620', // Muted jungle
-    '#2e7d32'  // Earthy emerald for contrast
+    '#0a0a0a',
+    '#111111',
+    '#0c0c0c',
+    '#080808',
+    '#0e0e0e',
+    '#0a0a0a'
   ]
-  
 }: GradientBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number | undefined>(undefined)
+  const animationRef = useRef<number>()
   const timeRef = useRef(0)
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function GradientBackground({
 
       // Create a smooth fading effect
       ctx.globalAlpha = 0.9
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)' // Faint fade effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
       ctx.fillRect(0, 0, width, height)
 
       // Create a dynamic, fluid gradient
@@ -55,7 +55,7 @@ export function GradientBackground({
 
       colors.forEach((color, i) => {
         // Smooth sine wave motion
-        const wave = Math.sin(timeRef.current * 2 + i * 1.5) * 0.4 + 0.5 // Normalize range [0, 1]
+        const wave = Math.sin(timeRef.current * 2 + i * 1.5) * 0.4 + 0.5
         gradient.addColorStop(wave, color)
       })
 
@@ -73,13 +73,18 @@ export function GradientBackground({
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
-      if (animationRef.current) cancelAnimationFrame(animationRef.current)
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
     }
   }, [colors, speed])
 
   return (
     <div className={cn('fixed inset-0 -z-10', className)}>
-      <canvas ref={canvasRef} className="w-full h-full" />
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full"
+      />
     </div>
   )
 }
